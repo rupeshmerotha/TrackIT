@@ -5,7 +5,7 @@ import { formatMinutes } from '@/lib/time'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
 
-export default function Heatmap({ dataMap, skillId }: { dataMap: Map<string, { minutes: number, skillIds: Set<string> }>, skillId?: string }) {
+export default function Heatmap({ dataMap }: { dataMap: Map<string, { minutes: number, skillIds: Set<string> }> }) {
   const skills = useAppStore(state => state.skills)
 
   const days = useMemo(() => {
@@ -15,9 +15,9 @@ export default function Heatmap({ dataMap, skillId }: { dataMap: Map<string, { m
 
     // Pad the beginning so the first column starts on a Sunday (0)
     const firstDayOfWeek = getDay(start)
-    const padding = Array.from({ length: firstDayOfWeek }).map((_, i) => {
-      return { date: null, dateStr: '', minutes: 0, skillIds: new Set<string>() }
-    })
+    const padding = Array.from({ length: firstDayOfWeek }).map(() => ({
+      date: null, dateStr: '', minutes: 0, skillIds: new Set<string>()
+    }))
 
     const actualDays = interval.map(date => {
       const dateStr = format(date, 'yyyy-MM-dd')

@@ -3,7 +3,6 @@ import { formatMinutes } from '@/lib/time'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { motion } from 'framer-motion'
 import { useMemo } from 'react'
-import { useAppStore } from '@/store'
 import Heatmap from '@/components/Heatmap'
 import ConsistencyChart from '@/components/ConsistencyChart'
 import RecentLogs from '@/components/RecentLogs'
@@ -34,11 +33,6 @@ export default function Dashboard() {
     }
   }
 
-  const item = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0 }
-  }
-
   return (
     <div className="space-y-8 pb-10">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -58,12 +52,12 @@ export default function Dashboard() {
         animate="show" 
         className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
       >
-        <KpiCard title="Today's Hours" value={formatMinutes(todayMinutes)} delay={0.1} />
-        <KpiCard title="Weekly Progress" value={formatMinutes(weekMinutes)} delay={0.2} />
-        <KpiCard title="Monthly Progress" value={formatMinutes(monthMinutes)} delay={0.3} />
-        <KpiCard title="Current Streak" value={`${currentStreak} d`} delay={0.4} />
-        <KpiCard title="Longest Streak" value={`${longestStreak} d`} delay={0.5} />
-        <KpiCard title="Total Lifetime" value={formatMinutes(lifetimeMinutes)} delay={0.6} />
+        <KpiCard title="Today's Hours" value={formatMinutes(todayMinutes)} />
+        <KpiCard title="Weekly Progress" value={formatMinutes(weekMinutes)} />
+        <KpiCard title="Monthly Progress" value={formatMinutes(monthMinutes)} />
+        <KpiCard title="Current Streak" value={`${currentStreak} d`} />
+        <KpiCard title="Longest Streak" value={`${longestStreak} d`} />
+        <KpiCard title="Total Lifetime" value={formatMinutes(lifetimeMinutes)} />
       </motion.div>
 
       <div className="space-y-4">
@@ -85,7 +79,7 @@ export default function Dashboard() {
   )
 }
 
-function KpiCard({ title, value, delay }: { title: string, value: string, delay: number }) {
+function KpiCard({ title, value }: { title: string, value: string }) {
   return (
     <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
       <Card className="overflow-hidden hover:border-primary/50 transition-colors bg-card/50 backdrop-blur-sm">

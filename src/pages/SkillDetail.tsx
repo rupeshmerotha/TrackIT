@@ -75,7 +75,7 @@ export default function SkillDetail() {
       <div className="space-y-4 pt-4">
         <h2 className="text-2xl font-semibold tracking-tight">Consistency Heatmap</h2>
         <Card className="p-4 flex items-center justify-center bg-card/50 backdrop-blur-sm shadow-sm overflow-hidden">
-             <Heatmap dataMap={heatmapData} skillId={skill.id} />
+             <Heatmap dataMap={heatmapData} />
         </Card>
       </div>
       

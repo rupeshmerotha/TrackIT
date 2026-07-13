@@ -53,7 +53,7 @@ const generateDistinctColor = (index: number) => {
 
 export const useAppStore = create<AppState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       skills: [],
       logs: [],
 
